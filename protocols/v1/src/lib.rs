@@ -108,20 +108,8 @@ pub trait IsServer<'a> {
                 Ok(None)
             }
             methods::Client2Server::Submit(submit) => {
-                let has_valid_version_bits = match &submit.version_bits {
-                    Some(a) => {
-                        if let Some(version_rolling_mask) = self.version_rolling_mask() {
-                            version_rolling_mask.check_mask(a)
-                        } else {
-                            false
-                        }
-                    }
-                    None => self.version_rolling_mask().is_none(),
-                };
-
                 let is_valid_submission = self.is_authorized(&submit.user_name)
-                    && self.extranonce2_size() == submit.extra_nonce2.len()
-                    && has_valid_version_bits;
+                    && self.extranonce2_size() == submit.extra_nonce2.len();
 
                 if is_valid_submission {
                     let accepted = self.handle_submit(&submit);
