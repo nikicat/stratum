@@ -78,7 +78,10 @@ async fn main() {
     ) = broadcast::channel(10);
 
     // Format `Upstream` connection address
-    let upstream_addr = (proxy_config.upstream_address.as_str(), proxy_config.upstream_port)
+    let upstream_addr = (
+        proxy_config.upstream_address.as_str(),
+        proxy_config.upstream_port,
+    )
         .to_socket_addrs()
         .unwrap_or_else(|e| {
             panic!(
