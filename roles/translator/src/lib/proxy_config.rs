@@ -4,6 +4,7 @@ use serde::Deserialize;
 #[derive(Debug, Deserialize, Clone)]
 pub struct ProxyConfig {
     pub upstream_address: String,
+    pub upstream_port: u16,
     pub upstream_authority_pubkey: Secp256k1PublicKey,
     pub downstream_address: String,
     pub downstream_port: u16,
